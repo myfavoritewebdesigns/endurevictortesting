@@ -1,0 +1,38 @@
+---
+// Membership / partner badge strip shown just below the header.
+// Badges live in /public so they're served as-is (no processing needed).
+---
+<section class="trust-strip" aria-label="Memberships">
+  <div class="container trust-inner">
+    <span class="trust-label">Proud member of</span>
+    <img src="/cai-badge.png" alt="Community Associations Institute — Business Partner" class="trust-badge" />
+    <img src="/cacm-badge.png" alt="CACM Member" class="trust-badge" />
+  </div>
+</section>
+
+<style>
+  .trust-strip {
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .trust-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding-block: 14px;
+    flex-wrap: wrap;
+  }
+  .trust-label {
+    font-weight: 700;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+  .trust-badge { height: 48px; width: auto; display: block; }
+
+  @media (max-width: 560px) {
+    .trust-label { width: 100%; text-align: center; }
+    .trust-inner { gap: 20px; }
+  }
+</style>

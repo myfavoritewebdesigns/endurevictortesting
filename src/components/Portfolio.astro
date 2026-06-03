@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import k1 from '../assets/images/kitchen-1.jpg';
+import k2 from '../assets/images/kitchen-2.jpg';
+import k3 from '../assets/images/kitchen-4.jpg';
+import k4 from '../assets/images/kitchen-5.jpg';
+import k5 from '../assets/images/kitchen-7.jpg';
+import k6 from '../assets/images/kitchen-2.jpg';
+
+const tiles = [
+  { img: k1, span: 'a' },
+  { img: k2, span: 'b' },
+  { img: k3, span: 'c' },
+  { img: k4, span: 'd' },
+  { img: k5, span: 'e' },
+  { img: k6, span: 'f' },
+];
+---
+<section class="section portfolio">
+  <div class="container">
+    <h2 class="section-title">From the Endure Painting Cabinet Portfolio</h2>
+    <p class="section-subtitle">Real Bay Area kitchens and bathrooms we've refinished. Doors removed, sprayed, reinstalled.</p>
+
+    <div class="mosaic">
+      {tiles.map((t) => (
+        <div class:list={['tile', `tile-${t.span}`]}>
+          <Image src={t.img} alt="Refinished Bay Area kitchen by Endure Painting" widths={[400, 800]} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <div class="portfolio-cta">
+      <a class="btn btn-primary" href="#contact">See the Full Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 190px;
+    gap: 14px;
+  }
+  .tile { overflow: hidden; border-radius: 4px; }
+  .tile :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+  .tile:hover :global(img) { transform: scale(1.05); }
+
+  .tile-a { grid-column: span 2; grid-row: span 2; }
+  .tile-b { grid-column: span 1; grid-row: span 1; }
+  .tile-c { grid-column: span 1; grid-row: span 2; }
+  .tile-d { grid-column: span 1; grid-row: span 1; }
+  .tile-e { grid-column: span 2; grid-row: span 1; }
+  .tile-f { grid-column: span 1; grid-row: span 1; }
+
+  .portfolio-cta { text-align: center; margin-top: 30px; }
+
+  @media (max-width: 760px) {
+    .mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .tile-a, .tile-c, .tile-e { grid-column: span 2; grid-row: span 1; }
+  }
+</style>

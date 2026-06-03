@@ -1,0 +1,66 @@
+---
+// Kitchen Cabinet Painting landing page — rebuilt from the surviving components.
+// The original built page also had owner/team/reviews/FAQ sections, but that
+// version's source was lost when the page file was overwritten with built HTML.
+// This page is assembled cleanly from the 10 components that remain intact.
+import Base from '../../layouts/Base.astro';
+import TopBar from '../../components/TopBar.astro';
+import Header from '../../components/Header.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import Hero from '../../components/Hero.astro';
+import SectionDivider from '../../components/SectionDivider.astro';
+import Advantages from '../../components/Advantages.astro';
+import CtaBanner from '../../components/CtaBanner.astro';
+import Portfolio from '../../components/Portfolio.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+---
+
+<Base>
+  <TopBar />
+  <Header />
+  <TrustBar />
+
+  <Hero />
+
+  <SectionDivider />
+
+  <Advantages />
+
+  <CtaBanner
+    variant="yellow"
+    heading="Want to See What Your Kitchen Could Look Like?"
+    buttons={[
+      { label: 'Get a Quote', href: '#contact', style: 'btn-dark' },
+      { label: 'Call (510) 458-2120', href: 'tel:+15104582120', style: 'btn-outline-dark' },
+    ]}
+  />
+
+  <Portfolio />
+
+  <CtaBanner
+    variant="dark"
+    heading="Ready for a Stress-Free Kitchen Refresh?"
+    subtext="Bay Area's top-rated cabinet painting crew — factory-grade finishes, done in days."
+    buttons={[
+      { label: 'Get a Quote', href: '#contact', style: 'btn-primary' },
+      { label: 'Call (510) 458-2120', href: 'tel:+15104582120', style: 'btn-outline-light' },
+    ]}
+  />
+
+  <!-- Contact section: gives the "Get a Quote" buttons a destination. -->
+  <section id="contact" class="section">
+    <div class="container contact-inner">
+      <h2 class="section-title">Get Your Free Quote</h2>
+      <p class="section-subtitle">
+        Tell us about your kitchen and we'll be in touch within one business day.
+      </p>
+      <QuoteForm id="contact" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-inner {
+    max-width: 720px;
+  }
+</style>

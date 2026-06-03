@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets';
+import heroBg from '../assets/images/kitchen-3.jpg';
+import QuoteForm from './QuoteForm.astro';
+import StarRating from './StarRating.astro';
+---
+<section class="hero">
+  <Image src={heroBg} alt="" class="hero-bg" widths={[960, 1600, 1920]} loading="eager" fetchpriority="high" />
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1>
+        <span class="text-gold">Kitchen Cabinet</span> Painting<br />
+        for a Whole New Kitchen.
+      </h1>
+      <p class="hero-sub text-gold">Stress-Free, Bay Area's Top-Rated Crew.</p>
+
+      <figure class="hero-quote">
+        <blockquote>
+          "Daniel Lima, the owner of Endure Painting, was most professional in his advising the best
+          paint for the job, the work that needed to be done and in overseeing the details of his
+          crew's work until the job was completed. We were very pleased to work with him and will do
+          so again."
+        </blockquote>
+        <figcaption><span class="text-gold">Nancy Erb</span> <span class="sep">|</span> Google Review</figcaption>
+      </figure>
+
+      <div class="hero-rating">
+        <StarRating size={22} />
+        <span class="ratings-on">Ratings On</span>
+        <span class="g-logo"><img src="/google-logo.svg" alt="Google" /></span>
+      </div>
+    </div>
+
+    <div class="hero-form">
+      <QuoteForm header={true} id="hero" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; overflow: hidden; background: #222; }
+  .hero-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(90deg, rgba(15,18,22,.92) 0%, rgba(15,18,22,.86) 45%, rgba(15,18,22,.7) 100%);
+  }
+  .hero-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 46px;
+    align-items: center;
+    padding-block: 60px;
+  }
+
+  .hero-copy h1 {
+    color: #fff;
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-weight: 800;
+    margin-bottom: 14px;
+  }
+  .hero-sub { font-size: 1.25rem; font-weight: 700; margin-bottom: 26px; }
+
+  .hero-quote {
+    margin: 0 0 22px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    padding: 18px 20px;
+    max-width: 620px;
+  }
+  .hero-quote blockquote { margin: 0 0 10px; color: #e9e9e9; font-size: 0.92rem; line-height: 1.55; }
+  .hero-quote figcaption { font-size: 0.85rem; color: #cfcfcf; font-weight: 600; }
+  .hero-quote figcaption .text-gold { font-weight: 700; }
+  .hero-quote .sep { color: #777; margin: 0 4px; }
+
+  .hero-rating { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 600; }
+  .ratings-on { font-size: 0.9rem; }
+  .g-logo { display: inline-flex; }
+  .g-logo img { height: 22px; width: auto; display: block; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

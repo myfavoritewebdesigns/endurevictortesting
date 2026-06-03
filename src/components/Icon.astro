@@ -1,0 +1,113 @@
+---
+// Inline SVG icon set. Usage: <Icon name="clock" size={28} />
+// Stroke icons inherit `currentColor`; multicolor logos (Google) are self-contained.
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+const { name, size = 24, class: className } = Astro.props;
+const s = { width: size, height: size, class: className };
+---
+
+{name === 'spray' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="9" width="9" height="7" rx="1.5" />
+    <path d="M12 11h3l2-2h0M12 14h3l2 2" />
+    <path d="M6 9V6h4v3" />
+    <path d="M20 7h.01M21 10h.01M20 13h.01" />
+    <path d="M7 16v4M9 16v4" />
+  </svg>
+)}
+
+{name === 'badge' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="9" r="6" />
+    <path d="m9 12-2 8 5-3 5 3-2-8" />
+    <path d="m9.5 9 1.7 1.7L14.5 7.5" />
+  </svg>
+)}
+
+{name === 'hands' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 13l5 3 8-3 5 2" />
+    <rect x="8" y="6" width="8" height="6" rx="1" />
+    <path d="M5 11l-2 2v5M19 11l2 2v5" />
+  </svg>
+)}
+
+{name === 'swatch' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="7" height="18" rx="1.5" />
+    <path d="M10 8l6-3 4 11-9 4" />
+    <circle cx="6.5" cy="17.5" r="0.6" fill="currentColor" />
+  </svg>
+)}
+
+{name === 'family' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="7" cy="8" r="2.4" /><circle cx="17" cy="8" r="2.4" /><circle cx="12" cy="6.5" r="2.4" />
+    <path d="M3 19c0-2.5 2-4 4-4s4 1.5 4 4M13 19c0-2.5 2-4 4-4s4 1.5 4 4M8.5 18c0-2.8 1.7-4.5 3.5-4.5s3.5 1.7 3.5 4.5" />
+  </svg>
+)}
+
+{name === 'clock' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+)}
+
+{name === 'chevron' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+)}
+
+{name === 'arrow' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+)}
+
+{name === 'phone' && (
+  <svg {...s} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"/>
+  </svg>
+)}
+
+{name === 'pin' && (
+  <svg {...s} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2c-3.9 0-7 3.1-7 7 0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+  </svg>
+)}
+
+{name === 'mail' && (
+  <svg {...s} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7L4 7v1l8 5 8-5V7l-8 5z"/>
+  </svg>
+)}
+
+{name === 'brush' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9.5 14.5 3 21" />
+    <path d="M14 4l6 6-7 3-2-2z" />
+    <path d="m12 6 6 6" />
+  </svg>
+)}
+
+{name === 'google' && (
+  <svg {...s} viewBox="0 0 24 24">
+    <path fill="#4285F4" d="M22.5 12.2c0-.7-.06-1.4-.18-2.06H12v3.9h5.9a5.04 5.04 0 0 1-2.19 3.3v2.74h3.54c2.07-1.9 3.25-4.7 3.25-7.88z"/>
+    <path fill="#34A853" d="M12 23c2.95 0 5.43-.98 7.24-2.65l-3.54-2.74c-.98.66-2.24 1.05-3.7 1.05-2.85 0-5.26-1.92-6.12-4.5H2.23v2.83A11 11 0 0 0 12 23z"/>
+    <path fill="#FBBC05" d="M5.88 14.16a6.6 6.6 0 0 1 0-4.32V7.01H2.23a11 11 0 0 0 0 9.98l3.65-2.83z"/>
+    <path fill="#EA4335" d="M12 5.04c1.6 0 3.05.55 4.18 1.63l3.14-3.14C17.43 1.7 14.95.7 12 .7A11 11 0 0 0 2.23 7.01l3.65 2.83C6.74 6.96 9.15 5.04 12 5.04z"/>
+  </svg>
+)}
+
+{name === 'cabinet' && (
+  <svg {...s} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="3" width="16" height="18" rx="1" />
+    <path d="M12 3v18M7 7h1M16 7h1M7 15h1M16 15h1" />
+  </svg>
+)}

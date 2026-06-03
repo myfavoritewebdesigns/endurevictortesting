@@ -1,0 +1,187 @@
+---
+// Lead-capture form wired to Web3Forms (https://web3forms.com).
+// Replace YOUR_ACCESS_KEY below with the key from your Web3Forms dashboard.
+//
+// Props:
+//   header  - show the gold "Get a Quote" curved header (used in the hero)
+//   id      - unique id so the two instances on the page don't collide
+interface Props {
+  header?: boolean;
+  id?: string;
+}
+const { header = false, id = 'quote' } = Astro.props;
+
+const ACCESS_KEY = 'YOUR_ACCESS_KEY'; // <-- paste your Web3Forms access key here
+---
+
+<div class:list={['quote-card', { 'has-header': header }]}>
+  {header && <div class="quote-header">Get a Quote</div>}
+
+  <form class="quote-form" id={`form-${id}`} action="https://api.web3forms.com/submit" method="POST">
+    <!-- Web3Forms required + config fields -->
+    <input type="hidden" name="access_key" value={ACCESS_KEY} />
+    <input type="hidden" name="subject" value="New Cabinet Painting Quote Request — Endure Painting" />
+    <input type="hidden" name="from_name" value="Endure Painting Website" />
+    <!-- Honeypot spam trap (must stay empty) -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <div class="row two">
+      <input type="text" name="First Name" placeholder="First Name" required />
+      <input type="text" name="Last Name" placeholder="Last Name" required />
+    </div>
+
+    <div class="row two">
+      <input type="tel" name="Phone" placeholder="Phone" required />
+      <input type="email" name="Email" placeholder="Email" required />
+    </div>
+
+    <div class="row two">
+      <input type="text" name="How Did You Hear About Us?" placeholder="How Did You Hear About Us?" />
+      <input type="text" name="What Would You Like Painted?" placeholder="What Would You Like Painted?" />
+    </div>
+
+    <div class="row">
+      <input type="text" name="Address" placeholder="Address" />
+    </div>
+
+    <fieldset class="radios">
+      <legend>Are You a New Customer?</legend>
+      <label><input type="radio" name="Are You a New Customer?" value="Yes" /> Yes</label>
+      <label><input type="radio" name="Are You a New Customer?" value="No" /> No</label>
+    </fieldset>
+
+    <div class="row">
+      <textarea name="How can we help you?" placeholder="How can we help you?" rows="3"></textarea>
+    </div>
+
+    <div class="form-foot">
+      <fieldset class="radios reply">
+        <legend>Best Way To Reply</legend>
+        <label><input type="radio" name="Best Way To Reply" value="Phone" /> Phone</label>
+        <label><input type="radio" name="Best Way To Reply" value="Text" /> Text</label>
+        <label><input type="radio" name="Best Way To Reply" value="Email" /> Email</label>
+      </fieldset>
+      <button type="submit" class="send-btn">SEND</button>
+    </div>
+
+    <p class="form-result" id={`result-${id}`} aria-live="polite"></p>
+  </form>
+</div>
+
+<style>
+  .quote-card {
+    background: var(--color-dark-2);
+    border-radius: 10px;
+    padding: 22px;
+    color: #fff;
+  }
+  .quote-card.has-header { padding-top: 0; overflow: hidden; }
+
+  .quote-header {
+    background: var(--color-primary);
+    color: #1a1a1a;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    padding: 16px 26px 22px;
+    margin: 0 -22px 18px;
+    border-radius: 0 0 60% 0 / 0 0 100% 0;
+    width: 70%;
+  }
+
+  .row { margin-bottom: 12px; }
+  .row.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #222;
+    background: #fff;
+  }
+  input::placeholder, textarea::placeholder { color: #9a9a9a; }
+  textarea { resize: vertical; }
+
+  .radios {
+    border: none;
+    padding: 0;
+    margin: 0 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .radios legend { float: left; margin-right: 14px; font-size: 0.92rem; color: #e8e8e8; padding: 0; }
+  .radios.reply legend { float: none; width: 100%; color: var(--color-primary); font-weight: 700; margin-bottom: 4px; }
+  .radios label { display: inline-flex; align-items: center; gap: 6px; font-size: 0.92rem; cursor: pointer; }
+  .radios input { accent-color: var(--color-primary); }
+
+  .form-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .send-btn {
+    background: var(--color-primary-cta);
+    color: #1a1a1a;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 13px 46px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .15s ease;
+  }
+  .send-btn:hover { background: var(--color-primary); }
+
+  .form-result { margin: 12px 0 0; font-size: 0.9rem; }
+  .form-result.ok { color: #6ee7a8; }
+  .form-result.err { color: #ff8a7a; }
+
+  @media (max-width: 560px) {
+    .row.two { grid-template-columns: 1fr; }
+    .form-foot { flex-direction: column; align-items: stretch; }
+    .send-btn { width: 100%; }
+  }
+</style>
+
+<script define:vars={{ id }}>
+  const form = document.getElementById(`form-${id}`);
+  const result = document.getElementById(`result-${id}`);
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      result.className = 'form-result';
+      result.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json();
+        if (data.success) {
+          result.classList.add('ok');
+          result.textContent = "Thanks! We'll be in touch inside one business day.";
+          form.reset();
+        } else {
+          result.classList.add('err');
+          result.textContent = data.message || 'Something went wrong. Please call us instead.';
+        }
+      } catch {
+        result.classList.add('err');
+        result.textContent = 'Network error. Please call (510) 458-2120.';
+      }
+    });
+  }
+</script>

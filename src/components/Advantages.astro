@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import imgPaint from '../assets/images/kitchen-6.jpg';
+import imgReface from '../assets/images/assembling-door.jpg';
+import imgReplace from '../assets/images/installing-cabinets.jpg';
+
+const columns = [
+  {
+    img: imgPaint,
+    title: 'Paint & Refinish (What We Do)',
+    highlight: true,
+    rows: [
+      ['Timeline:', 'Days, not weeks.'],
+      ['Mess:', 'Minimal. Doors leave the house. Hardware stays.'],
+      ['Outcome:', 'Factory-grade sprayed finish. New color, same kitchen footprint. Indistinguishable from new.'],
+      ['Disruption:', 'Your kitchen stays usable through most of the project'],
+    ],
+  },
+  {
+    img: imgReface,
+    title: 'Refacing',
+    rows: [
+      ['Timeline:', 'Multiple weeks.'],
+      ['Mess:', 'Moderate. Doors and drawer fronts replaced, boxes resurfaced.'],
+      ['Outcome:', 'New door style and finish. Boxes stay.'],
+      ['Disruption:', 'Hardware and doors gone for the duration.'],
+    ],
+  },
+  {
+    img: imgReplace,
+    title: 'Full Replacement',
+    rows: [
+      ['Timeline:', 'Many weeks.'],
+      ['Mess:', 'Major. Demo, debris, kitchen unusable.'],
+      ['Outcome:', "New layout possible. Worth it if your current boxes are damaged or your layout doesn't work."],
+      ['Disruption:', 'Find alternate accommodations during the build.'],
+    ],
+  },
+];
+---
+<section class="section advantages">
+  <div class="container">
+    <h2 class="section-title">Advantages of Kitchen Cabinet Painting</h2>
+    <p class="section-subtitle">Three ways to update kitchen cabinets. Here's how they actually compare.</p>
+
+    <div class="adv-grid">
+      {columns.map((col) => (
+        <article class="adv-col">
+          <Image src={col.img} alt={col.title} class="adv-img" widths={[400, 700]} loading="lazy" />
+          <h3 class:list={['adv-title', { gold: col.highlight }]}>{col.title}</h3>
+          <dl class="adv-rows">
+            {col.rows.map(([label, val]) => (
+              <div class="adv-row"><dt>{label}</dt> <dd>{val}</dd></div>
+            ))}
+          </dl>
+          {col.highlight && (
+            <a class="adv-link" href="#contact">Request a Quote <Icon name="arrow" size={18} /></a>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <p class="adv-note">
+      If your cabinet boxes are in good shape and the layout works, painting is the fastest,
+      lowest-disruption path to a new-looking kitchen.
+    </p>
+  </div>
+</section>
+
+<style>
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .adv-col {
+    background: var(--color-card);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .adv-img { width: 100%; height: 200px; object-fit: cover; }
+  .adv-title { font-size: 1.18rem; margin: 18px 22px 12px; }
+  .adv-title.gold { color: var(--color-secondary); }
+  .adv-rows { margin: 0 22px 18px; }
+  .adv-row { font-size: 0.9rem; margin-bottom: 9px; color: #555; }
+  .adv-row dt { display: inline; font-weight: 800; color: #2b2b2b; }
+  .adv-row dd { display: inline; margin: 0; }
+  .adv-link {
+    margin: auto 22px 22px;
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--color-secondary); font-weight: 800; font-family: var(--font-heading);
+  }
+  .adv-link:hover { color: var(--color-secondary-dark); }
+
+  .adv-note {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    max-width: 880px;
+    margin: 40px auto 0;
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 900px) {
+    .adv-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
+  }
+</style>

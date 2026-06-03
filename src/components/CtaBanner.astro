@@ -1,0 +1,52 @@
+---
+// Reusable call-to-action band.
+//   variant: 'yellow' | 'dark'
+//   buttons: [{ label, href, style }]  (style = a .btn modifier class)
+interface BtnDef { label: string; href: string; style: string; }
+interface Props {
+  variant?: 'yellow' | 'dark';
+  heading: string;
+  subtext?: string;
+  buttons: BtnDef[];
+}
+const { variant = 'yellow', heading, subtext, buttons } = Astro.props;
+---
+<section class:list={['cta-band', variant]}>
+  <div class="container cta-inner">
+    <div class="cta-text">
+      <h2>{heading}</h2>
+      {subtext && <p>{subtext}</p>}
+    </div>
+    <div class="cta-buttons">
+      {buttons.map((b) => <a class:list={['btn', b.style]} href={b.href}>{b.label}</a>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band.yellow { background: var(--color-primary-cta); }
+  .cta-band.dark { background: var(--color-dark); }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding-block: 30px;
+    flex-wrap: wrap;
+  }
+  .cta-text h2 { margin: 0; font-size: clamp(1.3rem, 2.6vw, 1.9rem); }
+  .cta-text p { margin: 6px 0 0; font-weight: 600; }
+
+  .yellow .cta-text h2 { color: #1a1a1a; }
+  .dark .cta-text h2 { color: #fff; }
+  .dark .cta-text p { color: var(--color-primary); }
+
+  .cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  @media (max-width: 760px) {
+    .cta-inner { flex-direction: column; align-items: flex-start; }
+    .cta-buttons { width: 100%; }
+    .cta-buttons .btn { flex: 1; }
+  }
+</style>

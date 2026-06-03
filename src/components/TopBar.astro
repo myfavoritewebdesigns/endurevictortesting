@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+---
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span class="serving">Serving the San Francisco Bay and Surrounding Communities</span>
+    <div class="topbar-right">
+      <a href="mailto:hello@endurepainting.com" class="tb-item">
+        <Icon name="mail" size={15} /> hello@endurepainting.com
+      </a>
+      <span class="tb-item">
+        <Icon name="pin" size={15} /> 1031 San Leandro Blvd. San Leandro CA 94577
+      </span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .topbar {
+    background: var(--color-dark);
+    color: #d8d8d8;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    gap: 16px;
+  }
+  .serving { color: #f3f3f3; }
+  .topbar-right { display: flex; align-items: center; gap: 26px; }
+  .tb-item { display: inline-flex; align-items: center; gap: 7px; color: #d8d8d8; }
+  .tb-item :global(svg) { fill: var(--color-primary); }
+
+  @media (max-width: 900px) {
+    .topbar { display: none; }
+  }
+</style>
